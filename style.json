@@ -1,0 +1,32 @@
+{
+  "ShowLogs": true,
+  "QMainWindow": [
+    {
+      "tittle": "SignaLab"
+    }
+  ],
+  "QSettings": [
+    {
+      "ThemeSettings": [
+        {
+          "CustomTheme": [
+            {
+              "Background-color": "lightgrey",
+              "Text-color": "black",
+              "Accent-color": "#0000FF",
+              "Icons-color": "#black",
+              "Theme-name": "Default-theme",
+              "Default-Theme": true
+            }
+          ]
+        }
+      ],
+      "AppSettings": {
+        "OrginizationName": "SignaLab",
+        "ApplicationName": "R&M Co. Ltd.",
+        "OrginizationDormain": "SignaLab.org"
+      }
+    }
+  ],
+  "QtBinding": "PySide6"
+}
