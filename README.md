@@ -84,8 +84,8 @@ The application allows users to view signals in both the time domain and frequen
 Once the installation is complete, you can run the SignaLab application from the project's root directory:
 
 
-## Ensure your TrueSignal oscilloscope hardware is connected to a USB port before starting the application.
-### Usage
+Ensure your TrueSignal oscilloscope hardware is connected to a USB port before starting the application.
+## Usage
   Connect Hardware: Plug your TrueSignal oscilloscope into a USB port on your computer.
   Launch SignaLab: Run main.py as described above.
   Interface:
