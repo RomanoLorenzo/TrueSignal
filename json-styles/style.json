@@ -2,7 +2,13 @@
   "ShowLogs": true,
   "QMainWindow": [
     {
-      "tittle": "SignaLab"
+      "tittle": "SignaLab",
+      "logo": {
+        "path": "icons\\logo1.jpg",
+        "text": {
+          "content": "SignaLab"
+        }
+      }
     }
   ],
   "QSettings": [
