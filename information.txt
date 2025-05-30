@@ -1,0 +1,143 @@
+===============================================================================
+ R&M Corporation - SignaLab Software - Application Information
+===============================================================================
+
+Product Name: SignaLab
+Version: 1.0.0
+Build Date: May, 2025
+Copyright (c) 2025 R&M Corporation. All rights reserved.
+
+Developed by:
+    Alessandro Massafra
+    Lorenzo Romano
+
+===============================================================================
+Project Overview
+===============================================================================
+
+Welcome to SignaLab, an advanced software solution
+designed by R&M Corporation for real-time visualization, analysis, and
+recording of electrical signals. This tool has been developed for engineers,
+technicians, students, and hobbyists requiring a flexible and powerful
+virtual oscilloscope directly on their desktop.
+
+Our suite offers an intuitive user interface and a comprehensive set of
+features for signal analysis in both the time domain and frequency domain,
+leveraging your computer's processing power to provide accurate measurements
+and clear graphical representation.
+
+===============================================================================
+Key Features
+===============================================================================
+
+*   Multi-Channel Display:
+    Simultaneously analyze two signal channels (Channel 1 and Channel 2).
+    View channels individually or combined on a single graph for direct
+    comparison.
+
+*   Time and Frequency Domain Analysis:
+    Seamlessly switch from standard time-domain display to frequency-domain
+    spectrum display (FFT - Fast Fourier Transform) for each channel,
+    allowing for in-depth analysis of signal harmonic components.
+
+*   Precise Scale Controls (Volts/Div, Time/Div):
+    Finely adjust vertical (Volts per Division) and horizontal (Time per
+    Division) scales using custom spin-box controls. These offer predefined
+    steps (1-2-5-7.5 sequence for Volts/Div, 0.5-1-2-5 for Time/Div) and
+    unit selection (V, mV, uV for voltage; s, ms, us for time).
+
+*   Integrated Trigger System:
+    Stabilize the display of repetitive waveforms and capture specific events
+    using the trigger system.
+    - Edge Trigger: Activates the trigger when the Channel 1 signal crosses a
+      dynamically calculated voltage level, which is the current average of
+      the signal itself.
+    - Selectable Slope: The user can select to trigger on a rising edge
+      (Positive Edge), falling edge (Negative Edge), or both (interpretation
+      of the "d/dt=x" checkbox when others are deselected).
+    - Automatic Centering: The acquired waveform is automatically centered
+      around the trigger point for easy analysis.
+
+*   Data Logging:
+    Start and stop logging of raw signal data (Channel 1 and Channel 2) for
+    a predefined duration. Logged data can be saved to text files (.txt) for
+    offline analysis or for import into other software.
+
+*   Screenshot Capture:
+    Save an image (.png or .jpg) of the current display tab's content, useful
+    for documentation and reporting.
+
+*   Tabbed User Interface:
+    Easily navigate between different signal views (combined, Channel 1,
+    Channel 2, and a side-by-side view for Channel 1 and 2) using an
+    intuitive tabbed interface.
+
+*   Functional Menus:
+    Quickly access saving, logging, display settings, and this information
+    file via the menu bar.
+
+===============================================================================
+Architecture and Technologies
+===============================================================================
+
+SignaLab has been developed using the following
+key technologies:
+
+*   Programming Language: Python 3
+*   GUI Framework: PySide6 (Official Qt for Python bindings)
+*   Graphics Library: PyQtGraph (for high-performance scientific plotting)
+*   Numerical Library: NumPy (for efficient data buffer management and FFT
+    calculations)
+
+The software is structured in modules to ensure maintainability and
+scalability. A `SignalSource` class simulates data acquisition, while
+`GuiFunctions` orchestrates the interaction between the user interface and
+the processing logic. The `OscilloscopeWidget` widgets (and their variants)
+manage graph display, incorporating scaling logic, display modes, and
+trigger management.
+
+===============================================================================
+Quick Start Guide
+===============================================================================
+
+1.  Startup: Run the `main.py` application.
+2.  Signal Display: Simulated signals will be displayed automatically.
+3.  Navigation: Use the tabs (Tab 1, Tab 2, etc.) to change the signal view.
+4.  Scaling: Adjust "Volts/Div" and "Time/Div" using the controls in the
+    side panel to zoom or scale the display.
+5.  Frequency Domain: Use the "Channel 1" and "Channel 2" dropdowns under
+    "View" in the side panel to switch from "Time D." to "FFT".
+6.  Trigger:
+    - In the "Trigger" panel, select "Positive Edge" to trigger on the
+      rising edge of Channel 1 when it crosses its average.
+    - Select "Negative Edge" to trigger on the falling edge.
+    - Select "d/dt = x" (and deselect the other two) to trigger on both
+      edges relative to the average.
+    - If no trigger checkbox is selected, the oscilloscope operates in
+      "free-run" mode (continuous update).
+7.  Logging: Use the "RECORD" > "Start Recording" menu to log data.
+    You will be prompted to save the file upon completion.
+8.  Screenshot: Use "FILE" > "Save" to capture a screenshot of the active tab.
+
+===============================================================================
+Current Version Notes (v1.0.0)
+===============================================================================
+
+*   The signal source is currently simulated internally.
+*   The trigger is based on Channel 1, and the trigger level is the dynamic
+    average of the Channel 1 signal.
+*   The "d/dt = x" functionality is interpreted as a combined trigger on both
+    rising and falling edges if it's the only trigger option selected. It does
+    not implement a user-configurable slope trigger.
+
+===============================================================================
+Support and Contact
+===============================================================================
+
+For questions, bug reports, or suggestions, please refer to R&M
+Corporation's internal documentation or contact the internal technical
+support department.
+
+Thank you for choosing the R&M Digital Oscilloscope Suite.
+We hope this tool enhances your productivity and signal analysis
+capabilities.
