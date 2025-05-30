@@ -171,27 +171,6 @@ class Ui_MainWindow(object):
 "")
         self.gridLayout_4 = QGridLayout(self.TriggerWid)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.ddtfr = QFrame(self.TriggerWid)
-        self.ddtfr.setObjectName(u"ddtfr")
-        self.ddtfr.setMaximumSize(QSize(16777215, 40))
-        self.ddtfr.setFrameShape(QFrame.Shape.StyledPanel)
-        self.ddtfr.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_3 = QHBoxLayout(self.ddtfr)
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.label_5 = QLabel(self.ddtfr)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setMaximumSize(QSize(100, 50))
-
-        self.horizontalLayout_3.addWidget(self.label_5)
-
-        self.ddtch = QCheckBox(self.ddtfr)
-        self.ddtch.setObjectName(u"ddtch")
-
-        self.horizontalLayout_3.addWidget(self.ddtch, 0, Qt.AlignmentFlag.AlignRight)
-
-
-        self.gridLayout_4.addWidget(self.ddtfr, 6, 0, 1, 1)
-
         self.label_2 = QLabel(self.TriggerWid)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setMaximumSize(QSize(100, 30))
@@ -440,8 +419,6 @@ class Ui_MainWindow(object):
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Channel 2", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"View", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Channel 1", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"d/dt = x", None))
-        self.ddtch.setText("")
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"          Trigger", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Negative Edge", None))
         self.NegativeEdgech.setText("")
