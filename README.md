@@ -104,21 +104,21 @@ Ensure your TrueSignal oscilloscope hardware is connected to a USB port before s
 
 ## Project Structure
 
-├── icons/                  # Application icons (e.g., logo.jpg)
-├── json-styles/            # UI theme files (e.g., style.json)
-├── src/                    # Source code modules
-│   ├── Functions.py        # Core GUI logic, signal source, oscilloscope setup
-│   ├── OscilloscopeWidget.py # Oscilloscope plot widget classes
-│   ├── MenuFunctions.py    # Handles menu bar actions
-│   ├── trigger_handler.py  # Logic for signal triggering
-│   ├── custom_spinbox.py   # Custom QDoubleSpinBox for stepped values
-│   ├── ui_interface.py     # Auto-generated UI from Qt Designer (from main.ui)
-│   └── ui_main.py          # User interface class from ui_interface.py (This name appears in main_window.py, might be similar to ui_interface.py or a wrapper)
-├── main.py                 # Main application entry point
-├── main_window.py          # MainWindow class, sets up additional UI elements like trigger/recording controls
-├── requirements.txt        # Python package dependencies
-└── README.md               # This file
-
+*   `.`
+    *   `icons/`                  # Application icons
+    *   `json-styles/`            # UI theme files
+    *   `src/`                    # Source code modules
+        *   `Functions.py`        # Core GUI logic, signal source, oscilloscope setup
+        *   `OscilloscopeWidget.py` # Oscilloscope plot widget classes
+        *   `MenuFunctions.py`    # Handles menu bar actions
+        *   `trigger_handler.py`  # Logic for signal triggering
+        *   `custom_spinbox.py`   # Custom QDoubleSpinBox for stepped values
+        *   `ui_interface.py`     # Auto-generated UI from Qt Designer
+        *   `ui_main.py`          # User interface class 
+    *   `main.py`                 # Main application entry point
+    *   `main_window.py`          # MainWindow class, sets up additional UI elements like trigger/recording controls
+    *   `requirements.txt`        # Python package dependencies
+    *   `README.md`               # This file
 ## License
 
 
