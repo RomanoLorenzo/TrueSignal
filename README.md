@@ -13,7 +13,6 @@ TrueSignal: An open source desktop-based signal analyzer. Download the SignaLab 
 *   [Usage](#usage)
 *   [Project Structure](#project-structure)
 *   [Screenshots](#screenshots)
-*   [Contributing](#contributing)
 *   [License](#license)
 *   [Acknowledgements](#acknowledgements)
 
@@ -50,7 +49,7 @@ The application allows users to view signals in both the time domain and frequen
 ## Hardware Requirements
 
 *   **TrueSignal Oscilloscope:** This software is designed to work with the TrueSignal open-source USB oscilloscope hardware.
-    *   *(You should add a link here to your TrueSignal hardware project repository or documentation if it exists separately).*
+    
 *   A computer with a free USB port.
 
 ## Software Prerequisites
@@ -63,11 +62,9 @@ The application allows users to view signals in both the time domain and frequen
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/your-repository-name.git
-    cd your-repository-name
+    git clone https://github.com/RomanoLorenzo/TrueSignal.git
+    https://github.com/RomanoLorenzo/TrueSignal
     ```
-    (Replace `your-username/your-repository-name` with your actual GitHub repository URL)
-
 2.  **Create and activate a virtual environment (recommended):**
     ```bash
     # For Windows
@@ -105,7 +102,8 @@ Ensure your TrueSignal oscilloscope hardware is connected to a USB port before s
   python main.py
 
 
-.
+## Project Structure
+
 ├── icons/                  # Application icons (e.g., logo.jpg)
 ├── json-styles/            # UI theme files (e.g., style.json)
 ├── src/                    # Source code modules
@@ -121,5 +119,13 @@ Ensure your TrueSignal oscilloscope hardware is connected to a USB port before s
 ├── requirements.txt        # Python package dependencies
 └── README.md               # This file
 
+## License
 
+
+## Screenshots
 #TO ADD SOME SCREENSHOTS OF THE WORKING ENVIRONMENT.
+
+
+## Acknowledgements
+* Romano Lorenzo
+* Massafra Alessandro
