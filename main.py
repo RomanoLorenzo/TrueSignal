@@ -1,18 +1,40 @@
 from PySide6.QtWidgets import (QSpinBox, QMainWindow, QApplication,
                                QMessageBox, QFileDialog, QComboBox,
-                               QDoubleSpinBox, QVBoxLayout, QWidget)
-from PySide6.QtGui import QValidator, QDesktopServices, QScreen
+                               QDoubleSpinBox, QVBoxLayout, QWidget,
+                               QSplashScreen, QLabel)
+from PySide6.QtGui import QValidator, QDesktopServices, QScreen, QPixmap, QIcon
 from PySide6.QtCore import QTimer, Slot, QCoreApplication, QUrl, QStandardPaths, QDir, Qt
 
 import sys
+import os
 
+# Importa le tue classi locali
+# Assicurati che questi import siano corretti rispetto alla struttura delle tue directory
+# Assicurati che ui_interface.py esista e contenga Ui_MainWindow
 from src.ui_interface import *
-from src.Functions import GuiFunctions
+from src.Functions import GuiFunctions  # Assicurati che Functions.py esista
+# Assicurati che custom_spinbox.py esista
 from src.custom_spinbox import CustomStepSpinBox
+# Assicurati che MenuFunctions.py esista
 from src.MenuFunctions import MenuFunctions
 
-from Custom_Widgets import *
-from Custom_Widgets.QAppSettings import QAppSettings
+# Assicurati che queste classi custom siano disponibili
+# Potresti dover aggiustare gli import a seconda di dove si trovano
+try:
+    from Custom_Widgets import *
+    from Custom_Widgets.QAppSettings import QAppSettings
+    # Aggiungi qui gli import specifici se Custom_Widgets.py contiene classi come loadJsonStyle
+    # from Custom_Widgets.JsonStyle import loadJsonStyle # Esempio
+    # from Custom_Widgets.QAppSettings import QAppSettings # Esempio
+except ImportError:
+    print("Warning: Custom_Widgets not found. Styling and settings might not work.")
+    # Definisci dummy functions/classes se necessario per evitare NameError
+
+    class QAppSettings:
+        @staticmethod
+        def updateAppSettings(window): pass
+
+    def loadJsonStyle(window, ui, jsonFiles): pass
 
 
 class MainWindow(QMainWindow):
@@ -22,12 +44,41 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        # Create and show splash screen with logo
+        splash_pixmap = QPixmap("icons\logo.jpg")
+        self.splash = QSplashScreen(splash_pixmap, Qt.WindowType.WindowStaysOnTopHint)
+        self.splash.show()
+
+        # Set window title and icon
+        self.setWindowTitle("SignaLab")
+        self.setWindowIcon(QIcon("logo.jpg"))
+
+        # Assicurati che loadJsonStyle sia definita o importata correttamente
         loadJsonStyle(self, self.ui, jsonFiles={"json-styles/style.json"})
+
+        # Setup logo and title from JSON configuration
+        self.setup_logo()
+
+        # Crea l'istanza di GuiFunctions
         self.gui_functions = GuiFunctions(self)
-        self.setup_custom_controls()  # CHIAMATA QUI
+
+        # Configura i controlli personalizzati (questo sostituisce gli spinbox)
+        self.setup_custom_controls()
+
+        # ***** MODIFICA QUI *****
+        # EFFETTUA LE CONNESSIONI DOPO CHE GLI SPINBOX PERSONALIZZATI SONO STATI CREATI
+        # Chiama il metodo pubblico da GuiFunctions
+        self.gui_functions.connect_scale_controls()
+        # ************************
+
+        # Crea l'istanza di MenuFunctions, passando il riferimento aggiornato a gui_functions
+        # Assicurati che MenuFunctions possa gestire l'inizializzazione successiva se necessario
         self.menu_functions = MenuFunctions(
+            # Passa il riferimento a self.gui_functions
             self, gui_functions_ref=self.gui_functions)
 
+        # Popola ComboBox FFT
         fft_options = ["Time D.", "FFT"]
         if hasattr(self.ui, 'FFTcomb'):
             self.ui.FFTcomb.addItems(fft_options)
@@ -41,11 +92,40 @@ class MainWindow(QMainWindow):
         if hasattr(self.menu_functions, 'stop_recording_and_save'):
             self.recording_timer.timeout.connect(
                 self.menu_functions.stop_recording_and_save)
+
+        # Connetti la sorgente dati alla funzione di raccolta dati (già corretta)
         if hasattr(self.gui_functions, 'signal_source') and self.gui_functions.signal_source:
             self.gui_functions.signal_source.data_updated.connect(
                 self.collect_data_if_recording)
-        self.show()
+
+        # Close splash screen after 2 seconds and show main window
+        QTimer.singleShot(2000, self.splash.close)
+        QTimer.singleShot(2000, self.show)
+
+        # Assicurati che QAppSettings sia definita o importata
         QAppSettings.updateAppSettings(self)
+
+        # Force initial scale update
+        self.gui_functions.on_voltage_setting_changed()
+        self.gui_functions.on_time_setting_changed()
+
+    def setup_logo(self):
+        try:
+            with open("json-styles/style.json", 'r') as f:
+                import json
+                config = json.load(f)
+                logo_config = config["QMainWindow"][0].get("logo", {})
+                
+                if logo_config:
+                    # Set window icon (this will appear in the title bar)
+                    self.setWindowIcon(QIcon(logo_config["path"]))
+                    
+                    # Set window title
+                    text_config = logo_config.get("text", {})
+                    if text_config:
+                        self.setWindowTitle(text_config["content"])
+        except Exception as e:
+            print(f"Error setting up logo: {e}")
 
     def setup_custom_controls(self):
         print("Configuring custom controls and setting defaults...")
@@ -97,7 +177,7 @@ class MainWindow(QMainWindow):
                     if item_to_replace:
                         # Remove old item from layout
                         layout.takeAt(index_to_replace_at)
-                        old_spinbox.deleteLater()
+                        old_spinbox.deleteLater()  # Elimina il vecchio oggetto
                         layout.insertWidget(index_to_replace_at, new_spinbox)
                     # Fallback if not found in layout (shouldn't happen if UI is consistent)
                     else:
@@ -112,7 +192,7 @@ class MainWindow(QMainWindow):
                 print(
                     f"Warning: {spinbox_ui_name} not found in UI. Check name.")
 
-            # Populate ComboBox
+            # Populate ComboBox (Assumiamo che la ComboBox non venga sostituita, solo popolata)
             if hasattr(self.ui, combobox_ui_name):
                 combobox = getattr(self.ui, combobox_ui_name)
                 if isinstance(combobox, QComboBox):
@@ -130,11 +210,12 @@ class MainWindow(QMainWindow):
                 print(
                     f"Warning: {combobox_ui_name} not found in UI. Check name.")
 
+        # Esegue la sostituzione e il setup per i controlli Volt/Div e Time/Div
         replace_and_setup('voltdiv_spbx', 'voltdiv_cb', 'selframe1', voltage_sequence,
                           volt_units, GuiFunctions.DEFAULT_VOLT_DIV_VALUE, "V")
         replace_and_setup('timediv_spbx', 'timediv_cb', 'selframe2', time_sequence,
                           time_units, GuiFunctions.DEFAULT_TIME_DIV_VALUE, "s")
-       
+
     @Slot(float, float)
     def collect_data_if_recording(self, value1, value2):
         if self.is_recording:
