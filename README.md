@@ -12,8 +12,6 @@ TrueSignal: An open source desktop-based signal analyzer. Download the SignaLab 
 *   [Running the Application](#running-the-application)
 *   [Usage](#usage)
 *   [Project Structure](#project-structure)
-*   [Screenshots](#screenshots)
-*   [License](#license)
 *   [Acknowledgements](#acknowledgements)
 
 ## Overview
