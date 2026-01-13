@@ -119,12 +119,6 @@ Ensure your TrueSignal oscilloscope hardware is connected to a USB port before s
     *   `main_window.py`          # MainWindow class, sets up additional UI elements like trigger/recording controls
     *   `requirements.txt`        # Python package dependencies
     *   `README.md`               # This file
-## License
-
-
-## Screenshots
-#TO ADD SOME SCREENSHOTS OF THE WORKING ENVIRONMENT.
-
 
 ## Acknowledgements
 * Romano Lorenzo
